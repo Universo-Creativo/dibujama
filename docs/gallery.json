@@ -1,9 +1,9 @@
 {
     "images_data_file": ".\\images_data.json",
-    "public_path": ".\\public",
+    "public_path": ".",
     "templates_path": ".\\templates",
-    "images_path": ".\\public\\images\\photos",
-    "thumbnails_path": ".\\public\\images\\thumbnails",
+    "images_path": ".\\images\\photos",
+    "thumbnails_path": ".\\images\\thumbnails",
     "thumbnail_height": 160,
     "title": "Dibujama",
     "description": "Dibujos de la comunidad",

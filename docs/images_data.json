@@ -1,0 +1,18 @@
+{
+    "prueba.png": {
+        "src": "images\\photos\\prueba.png",
+        "mtime": 1779227749.960657,
+        "date": "",
+        "size": [
+            1408,
+            768
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images\\thumbnails\\prueba.jpg",
+        "thumbnail_size": [
+            294,
+            160
+        ]
+    }
+}
