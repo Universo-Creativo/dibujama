@@ -1,0 +1,16 @@
+# ===== Carpeta temporal de fotos =====
+# Las fotos se mueven automáticamente a public/images/photos/
+# cuando ejecutas build-gallery.ps1
+fotos/*
+!fotos/.gitkeep
+
+# ===== Sistema operativo =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Python =====
+__pycache__/
+*.pyc
+.venv/
+venv/

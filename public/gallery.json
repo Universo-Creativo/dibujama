@@ -1,0 +1,14 @@
+{
+    "images_data_file": ".\\images_data.json",
+    "public_path": ".\\public",
+    "templates_path": ".\\templates",
+    "images_path": ".\\public\\images\\photos",
+    "thumbnails_path": ".\\public\\images\\thumbnails",
+    "thumbnail_height": 160,
+    "title": "Dibujama",
+    "description": "Dibujos de la comunidad",
+    "background_photo": "",
+    "url": "https://luisenriquepupo16-rgb.github.io/dibujama/",
+    "background_photo_offset": 30,
+    "disable_captions": false
+}
