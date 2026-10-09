@@ -3,7 +3,7 @@
     Genera la galeria de dibujos y la sube a GitHub.
 .DESCRIPTION
     Este script:
-    1. Copia las fotos nuevas de la carpeta 'fotos/' a 'public/images/photos/'.
+    1. Copia las fotos nuevas de la carpeta 'fotos/' a 'docs/images/photos/'.
     2. Ejecuta 'gallery-build' para regenerar el HTML y las miniaturas.
     3. Vacia la carpeta 'fotos/' para evitar duplicados en el proximo uso.
     4. Hace git add, commit y push.
@@ -20,7 +20,7 @@ function Write-Err     { Write-Host "[X] $args" -ForegroundColor Red }
 
 # ===== Configuracion =====
 $FotosSource = "fotos"
-$PublicDir = "public"
+$PublicDir = "docs"
 $PhotosDest = "$PublicDir\images\photos"
 
 # ===== Verificar que estamos en la raiz del repo =====
@@ -46,7 +46,7 @@ if ($fotos.Count -eq 0) {
 
 Write-Step "Encontradas $($fotos.Count) foto(s) en '$FotosSource'."
 
-# ===== Copiar fotos a public/images/photos =====
+# ===== Copiar fotos a docs/images/photos =====
 if (-not (Test-Path $PhotosDest)) {
     New-Item -ItemType Directory -Path $PhotosDest -Force | Out-Null
 }
