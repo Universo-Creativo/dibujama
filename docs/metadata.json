@@ -1,0 +1,19 @@
+{
+    "Yozora2_fondo.png":  {
+                              "author":  "Luisi",
+                              "category":  "animal",
+                              "date":  "2026-10-09",
+                              "tags":  [
+
+                                       ]
+                          },
+    "prueba.png":  {
+                       "author":  "Luisi",
+                       "category":  "abstracto",
+                       "date":  "2026-10-09",
+                       "tags":  [
+                                    "prueba",
+                                    "colorido"
+                                ]
+                   }
+}

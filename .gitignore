@@ -1,6 +1,4 @@
 # ===== Carpeta temporal de fotos =====
-# Las fotos se mueven automaticamente a docs/images/photos/
-# cuando ejecutas build-gallery.ps1
 fotos/*
 !fotos/.gitkeep
 

@@ -1,12 +1,13 @@
 <#
 .SYNOPSIS
-    Genera la galeria de dibujos y la sube a GitHub.
+    Genera la galeria de dibujos, la metadata, y la sube a GitHub.
 .DESCRIPTION
     Este script:
-    1. Copia las fotos nuevas de la carpeta 'fotos/' a 'docs/images/photos/'.
-    2. Ejecuta 'gallery-build' para regenerar el HTML y las miniaturas.
-    3. Vacia la carpeta 'fotos/' para evitar duplicados en el proximo uso.
-    4. Hace git add, commit y push.
+    1. Ejecuta 'generate-metadata.ps1' para preguntar por fotos nuevas.
+    2. Copia las fotos de 'fotos/' a 'docs/images/photos/'.
+    3. Ejecuta 'gallery-build' para regenerar el HTML y las miniaturas.
+    4. Vacia la carpeta 'fotos/'.
+    5. Hace git add, commit y push.
 .NOTES
     Requiere Python 3 y simple-photo-gallery instalado:
     pip install simple-photo-gallery
@@ -46,12 +47,26 @@ if ($fotos.Count -eq 0) {
 
 Write-Step "Encontradas $($fotos.Count) foto(s) en '$FotosSource'."
 
-# ===== Copiar fotos a docs/images/photos =====
+# ===== Paso 1: Generar metadata =====
+Write-Host ""
+Write-Step "===== Paso 1: Generar metadata ====="
+$metadataScript = Join-Path (Get-Location).Path "generate-metadata.ps1"
+if (Test-Path $metadataScript) {
+    & $metadataScript
+    if ($LASTEXITCODE -ne 0 -and $LASTEXITCODE -ne $null) {
+        Write-Warn "generate-metadata.ps1 termino con codigo $LASTEXITCODE. Continuando..."
+    }
+} else {
+    Write-Warn "No se encontro 'generate-metadata.ps1'. Saltando este paso."
+}
+
+# ===== Paso 2: Copiar fotos a docs/images/photos =====
+Write-Host ""
+Write-Step "===== Paso 2: Copiar fotos ====="
 if (-not (Test-Path $PhotosDest)) {
     New-Item -ItemType Directory -Path $PhotosDest -Force | Out-Null
 }
 
-Write-Step "Copiando fotos a '$PhotosDest'..."
 foreach ($foto in $fotos) {
     $destino = Join-Path $PhotosDest $foto.Name
     Copy-Item -Path $foto.FullName -Destination $destino -Force
@@ -60,9 +75,9 @@ foreach ($foto in $fotos) {
 
 Write-Success "Fotos copiadas."
 
-# ===== Ejecutar gallery-build =====
-Write-Step "Ejecutando 'gallery-build'..."
-
+# ===== Paso 3: Ejecutar gallery-build =====
+Write-Host ""
+Write-Step "===== Paso 3: Regenerar galeria ====="
 $galleryBuild = Get-Command gallery-build -ErrorAction SilentlyContinue
 if (-not $galleryBuild) {
     Write-Err "'gallery-build' no encontrado. Instala con: pip install simple-photo-gallery"
@@ -83,13 +98,15 @@ try {
 
 Write-Success "Galeria regenerada."
 
-# ===== Vaciar la carpeta 'fotos/' (excepto .gitkeep) =====
-Write-Step "Vaciando carpeta '$FotosSource'..."
+# ===== Paso 4: Vaciar la carpeta 'fotos/' =====
+Write-Host ""
+Write-Step "===== Paso 4: Vaciar carpeta 'fotos/' ====="
 Get-ChildItem -Path $FotosSource -File | Where-Object { $_.Name -ne ".gitkeep" } | Remove-Item -Force
 Write-Success "Carpeta '$FotosSource' vaciada."
 
-# ===== Git add, commit, push =====
-Write-Step "Haciendo git add ..."
+# ===== Paso 5: Git add, commit, push =====
+Write-Host ""
+Write-Step "===== Paso 5: Git ====="
 git add .
 
 $status = git status --short

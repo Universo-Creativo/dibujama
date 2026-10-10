@@ -14,5 +14,21 @@
             294,
             160
         ]
+    },
+    "Yozora2_fondo.png": {
+        "src": "images\\photos\\Yozora2_fondo.png",
+        "mtime": 1779230665.4373374,
+        "date": "",
+        "size": [
+            1376,
+            768
+        ],
+        "type": "image",
+        "description": "",
+        "thumbnail": "images\\thumbnails\\Yozora2_fondo.jpg",
+        "thumbnail_size": [
+            286,
+            160
+        ]
     }
 }
